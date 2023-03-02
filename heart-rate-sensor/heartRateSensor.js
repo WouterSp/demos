@@ -8,17 +8,17 @@
       this._characteristics = new Map();
     }
     connect() {
-      return navigator.bluetooth.requestDevice({filters:[{services:[ 'heart_rate' ]}]})
+      return navigator.bluetooth.requestDevice({filters:[{name:[ 'XC1004 BLE Server' ]}]})
       .then(device => {
         this.device = device;
         return device.gatt.connect();
       })
       .then(server => {
         this.server = server;
-        return server.getPrimaryService('heart_rate');
+        return server.getPrimaryService('d7b7acd1-6785-4119-b156-c54b498bd873');
       })
       .then(service => {
-        return this._cacheCharacteristic(service, 'heart_rate_measurement');
+        return this._cacheCharacteristic(service, '3ef1c3a0-9f97-49B2-b3E4-78cfad8a3763');
       })
     }
 
